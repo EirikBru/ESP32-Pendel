@@ -1,6 +1,5 @@
 Adafruit_MPU6050 mpu;
 float alfa = 0.96; // mengde acc i komplimentærfilter
-float alphaGyro = 0.95; //mengde gyro filtrering
 
 void setupMPU(){
     while (!Serial)
@@ -49,7 +48,7 @@ void setupMPU(){
     Serial.println("+- 2000 deg/s");
     break;
   }
-  mpu.setFilterBandwidth(MPU6050_BAND_44_HZ);
+  mpu.setFilterBandwidth(MPU6050_BAND_5_HZ);
   Serial.print("Filter bandwidth set to: ");
   switch (mpu.getFilterBandwidth()) {
   case MPU6050_BAND_260_HZ:
@@ -90,23 +89,12 @@ void imuCalc(){
   float aZ = a.acceleration.z;
   
   // rad/s
-  float gX = g.gyro.x;
-  float gY = g.gyro.y;
-  float gZ = g.gyro.z;
+  gX = g.gyro.x;
+  gY = g.gyro.y;
+  gZ = g.gyro.z;
 
-  // Velocity:
-  static float prevFilteredGyroPitch = 0;
-  static float prevFilteredGyroRoll = 0;
-
-  // Filtrerer gyroskopdata med et eksponentielt glidende gjennomsnitt
-  filteredGyroPitch = alphaGyro * prevFilteredGyroPitch + (1 - alphaGyro) * gY;
-  filteredGyroRoll = alphaGyro * prevFilteredGyroRoll + (1 - alphaGyro) * gX;
-
-  prevFilteredGyroPitch = filteredGyroPitch;
-  prevFilteredGyroRoll = filteredGyroRoll;
-
-  gyroRoll = roll + filteredGyroRoll * dt;
-  gyroPitch = pitch + filteredGyroPitch * dt;
+  gyroRoll = roll + gX * dt;
+  gyroPitch = pitch + gY * dt;
   
     // Beregning av vinkler fra akselerometer
   float accRoll = atan2(aY, aZ);

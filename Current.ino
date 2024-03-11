@@ -14,7 +14,7 @@ void updateCurrent() {
     if (prevCurrentTime > 0) {
         currentDt = (currentCurrentTime - prevCurrentTime) / 1000000.0;
         if (currentDt > 0) {
-            I_2 = (u_2 - wheelSpeed_2 * Ke - La * (I_2 - I_prev_2) / currentDt) / Ra;
+            I_2 = ((u_2/25) - wheelSpeed_2 * Ke - La * (I_2 - I_prev_2) / currentDt) / Ra;
             I_prev_2 = I_2;
         }
     }

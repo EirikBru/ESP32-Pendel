@@ -3,13 +3,13 @@ void printStuff(){
 //  Serial.print("Roll: ");
 //  Serial.print(roll * (180/PI));
   Serial.print(" Pitch: ");
-  Serial.print(pitch * (180/PI));
+  Serial.print(pitch);
   
   // Omega_Pendel:
 //  Serial.print("   gyroRoll: ");
-//  Serial.print(filteredGyroRoll * (180/PI));
-  Serial.print(" filteredgyroPitch: ");
-  Serial.print(filteredGyroPitch * (180/PI));
+//  Serial.print(gyroRoll * (180/PI));
+  Serial.print(" gY: ");
+  Serial.print(gY);
   
   // Theta_Hjul:
 //  Serial.print("Pos_1: ");
@@ -21,8 +21,8 @@ void printStuff(){
 //  Serial.print(" Hastighet_1 (deg/s): ");
 //  Serial.println(wheelSpeed_1 * (180/PI));
 //  Serial.print(filteredSpeed_1 * (180/PI));
-  Serial.print("    Hastighet_2 (deg/s): ");
-  Serial.print(wheelSpeed_2 * (180/PI));
+  Serial.print("    Hastighet_2 (rad/s): ");
+  Serial.print(wheelSpeed_2);
 //  Serial.println(filteredSpeed_2 * (180/PI));
 
   Serial.print(" u_2: ");
@@ -37,4 +37,42 @@ void printStuff(){
   unsigned long currentTime = millis();
   dt = (currentTime - previousTime) / 1000.0; // Delta tid i sekunder
   previousTime = currentTime;
+}
+
+int Tuning() {
+  if (!Serial.available())  return 0;
+  delay(2);
+  char param = Serial.read();               // get parameter byte
+  if (!Serial.available()) return 0;
+  char cmd = Serial.read();                 // get command byte
+  Serial.flush();
+  switch (param) {
+    case '1':
+      if (cmd == '+')    k1 += 10;
+      if (cmd == '-')    k1 -= 10;
+      printValues();
+      break;
+    case '2':
+      if (cmd == '+')    k2 += 5;
+      if (cmd == '-')    k2 -= 5;
+      printValues();
+      break;
+     case '3':
+      if (cmd == '+')    k3 += 0.1;
+      if (cmd == '-')    k3 -= 0.1;
+      printValues();
+      break;  
+      case '4':
+      if (cmd == '+')    k4 += 1;
+      if (cmd == '-')    k4 -= 1;
+      printValues();
+      break;  
+  }
+}
+
+void printValues() {
+  Serial.print("k1: "); Serial.print(k1);
+  Serial.print(" k2: "); Serial.print(k2);
+  Serial.print(" k3: "); Serial.print(k3);  
+  Serial.print(" k4: "); Serial.println(k3, 3);
 }
