@@ -2,16 +2,13 @@ float alphaSpeed = 0.95; // (nærmere 0 = mindre filtrering)
 unsigned long prevTime = 0;
 
 // Encoder 1:
-static double filteredSpeed_1 = 0;
 volatile long encoderTicks_1 = 0;
 long prevEncoderTicks_1 = 0;
-const int hallSensorPinA_1 = 34;
-const int hallSensorPinB_1 = 35;
-double wheelSpeed_1 = 0;
+const int hallSensorPinA_1 = 35;
+const int hallSensorPinB_1 = 34;
 double wheelPos_1 = 0;
 
 // Encoder 2:
-static double filteredSpeed_2 = 0;
 volatile long encoderTicks_2 = 0;
 long prevEncoderTicks_2 = 0;
 const int hallSensorPinA_2 = 12;

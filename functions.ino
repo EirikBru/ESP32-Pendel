@@ -1,15 +1,15 @@
 void printStuff(){
   // Theta_Pendel:
-//  Serial.print("Roll: ");
-//  Serial.print(roll * (180/PI));
+  Serial.print("Roll: ");
+  Serial.print(roll, 3);
   Serial.print(" Pitch: ");
-  Serial.print(pitch);
+  Serial.print(pitch, 3);
   
   // Omega_Pendel:
-//  Serial.print("   gyroRoll: ");
-//  Serial.print(gyroRoll * (180/PI));
+  Serial.print("::  gX: ");
+  Serial.print(gX, 3);
   Serial.print(" gY: ");
-  Serial.print(gY);
+  Serial.print(gY, 3);
   
   // Theta_Hjul:
 //  Serial.print("Pos_1: ");
@@ -19,16 +19,24 @@ void printStuff(){
   
   // Omega_Hjul:
 //  Serial.print(" Hastighet_1 (deg/s): ");
-//  Serial.println(wheelSpeed_1 * (180/PI));
-//  Serial.print(filteredSpeed_1 * (180/PI));
-  Serial.print("    Hastighet_2 (rad/s): ");
-  Serial.print(wheelSpeed_2);
-//  Serial.println(filteredSpeed_2 * (180/PI));
+//  Serial.print(wheelSpeed_1 * (180/PI));
+  Serial.print(" fW_1 (rad/s): ");
+  Serial.print(filteredSpeed_1);
+//  Serial.print("    Hastighet_2 (rad/s): ");
+ // Serial.print(wheelSpeed_2);
+  Serial.print(" fW_2 (rad/s): ");
+  Serial.print(filteredSpeed_2);
 
+  Serial.print(" u_1: ");
+  Serial.print(u_1);
+//  Serial.print(" I_prev_1: ");
+//  Serial.print(I_prev_1);
   Serial.print(" u_2: ");
   Serial.print(u_2);
-  Serial.print(" I_prev_2: ");
-  Serial.print(I_prev_2);
+//  Serial.print(" I_prev_2: ");
+//  Serial.print(I_prev_2);
+  Serial.print(" I_1: "); 
+  Serial.print(I_1);
   Serial.print(" I_2: "); 
   Serial.println(I_2);
 }
