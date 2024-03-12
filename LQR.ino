@@ -1,8 +1,3 @@
-float k1 = -400;
-float k2 = -100;
-float k3 = 1;
-float k4 = 0;
-
 void lqrControl(){
   
   u_1 = -(k1*(roll-0.045) + k2*(gX+0.03) + k3*filteredSpeed_1 + k4*I_1);

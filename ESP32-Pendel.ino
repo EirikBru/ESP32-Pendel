@@ -1,6 +1,14 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <Wire.h>
+#include "BluetoothSerial.h"
+
+BluetoothSerial SerialBT;
+
+float k1 = -400;
+float k2 = -100;
+float k3 = 1;
+float k4 = 0;
 
 float dt = 0;
 float roll = 0, pitch = 0, gyroRoll = 0, gyroPitch = 0;
@@ -16,6 +24,7 @@ bool vertical = false;
 
 void setup(void) {
   Serial.begin(115200);
+  SerialBT.begin("ESP32_BT"); // BT navn
   setupMPU();
   setupEncoder();
   setupMotor();
@@ -30,6 +39,8 @@ void loop() {
   encoderCalc();
   updateCurrent();
   verticalCheck();
+  bluetoothUpdate();
+  
 
   // LQR and motor Update
   lqrControl();
