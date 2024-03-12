@@ -12,6 +12,7 @@ static double filteredSpeed_2 = 0;
 int deadBand = 40;
 unsigned long previousTime = 0;
 unsigned long prevCurrentTime = 0;
+bool vertical = false;
 
 void setup(void) {
   Serial.begin(115200);
@@ -23,15 +24,18 @@ void setup(void) {
 
 void loop() {
 
+  // Update sensors
   deltaTime_calc();
   imuCalc();
   encoderCalc();
   updateCurrent();
- 
+  verticalCheck();
+
+  // LQR and motor Update
   lqrControl();
   motorControl_1();  
   motorControl_2();
-  Tuning();
 
-  printStuff();
+  // Debug Print
+//  printStuff();
 }

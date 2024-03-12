@@ -38,7 +38,14 @@ void printStuff(){
   Serial.print(" I_1: "); 
   Serial.print(I_1);
   Serial.print(" I_2: "); 
-  Serial.println(I_2);
+  Serial.print(I_2);
+
+   if(vertical) {
+    Serial.println("vertical is true");
+  } else {
+    Serial.println("vertical is false");
+  }
+  
 }
 
  void deltaTime_calc(){
@@ -47,40 +54,13 @@ void printStuff(){
   previousTime = currentTime;
 }
 
-int Tuning() {
-  if (!Serial.available())  return 0;
-  delay(2);
-  char param = Serial.read();               // get parameter byte
-  if (!Serial.available()) return 0;
-  char cmd = Serial.read();                 // get command byte
-  Serial.flush();
-  switch (param) {
-    case '1':
-      if (cmd == '+')    k1 += 10;
-      if (cmd == '-')    k1 -= 10;
-      printValues();
-      break;
-    case '2':
-      if (cmd == '+')    k2 += 5;
-      if (cmd == '-')    k2 -= 5;
-      printValues();
-      break;
-     case '3':
-      if (cmd == '+')    k3 += 0.1;
-      if (cmd == '-')    k3 -= 0.1;
-      printValues();
-      break;  
-      case '4':
-      if (cmd == '+')    k4 += 1;
-      if (cmd == '-')    k4 -= 1;
-      printValues();
-      break;  
+void verticalCheck(){
+  float threshold = 0.1; // radianer
+  float startProgram = 0.03;
+  if( pitch > threshold || pitch < -threshold || roll > threshold || roll < -threshold ){
+    vertical = false;
   }
-}
-
-void printValues() {
-  Serial.print("k1: "); Serial.print(k1);
-  Serial.print(" k2: "); Serial.print(k2);
-  Serial.print(" k3: "); Serial.print(k3);  
-  Serial.print(" k4: "); Serial.println(k3, 3);
+  else if( pitch < startProgram && pitch > -startProgram && roll < startProgram && roll > -startProgram){
+    vertical = true; 
+  }
 }

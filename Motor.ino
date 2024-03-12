@@ -30,18 +30,25 @@ void setupMotor(){
 }
 
 void motorControl_1() {
-  u_1 = constrain(u_1, -255 + deadBand, 255 - deadBand);
-  int pwmValue_1;
-  if (u_1 < 0) {
-    pwmValue_1 = -u_1 - deadBand;
-    ledcWrite(ledChannel1, pwmValue_1);
-    ledcWrite(ledChannel2, 0);
-  }
-  else if (u_1 > 0) {
-    pwmValue_1 = u_1 + deadBand;
-    ledcWrite(ledChannel1, 0);
-    ledcWrite(ledChannel2, pwmValue_1);
-  }
+  u_1 = constrain(u_1, -255 + deadBand, 255 - deadBand);  
+  
+  if(vertical){
+    int pwmValue_1;
+    if (u_1 < 0) {
+      pwmValue_1 = -u_1 - deadBand;
+      ledcWrite(ledChannel1, pwmValue_1);
+      ledcWrite(ledChannel2, 0);
+    }
+    else if (u_1 > 0) {
+      pwmValue_1 = u_1 + deadBand;
+      ledcWrite(ledChannel1, 0);
+      ledcWrite(ledChannel2, pwmValue_1);
+    }
+    else {
+      ledcWrite(ledChannel1, 0);
+      ledcWrite(ledChannel2, 0);
+    }
+  } 
   else {
     ledcWrite(ledChannel1, 0);
     ledcWrite(ledChannel2, 0);
@@ -49,18 +56,25 @@ void motorControl_1() {
 }
 
 void motorControl_2() {
-  u_2 = constrain(u_2, -255 + deadBand, 255 - deadBand);
-  int pwmValue_2;
-  if (u_2 < 0) {
-    pwmValue_2 = -u_2 - deadBand;
-    ledcWrite(ledChannel3, pwmValue_2);
-    ledcWrite(ledChannel4, 0);
-  }
-  else if (u_2 > 0) {
-    pwmValue_2 = u_2 + deadBand;
-    ledcWrite(ledChannel3, 0);
-    ledcWrite(ledChannel4, pwmValue_2);
-  }
+  u_2 = constrain(u_2, -255 + deadBand, 255 - deadBand);  
+  
+  if(vertical){
+    int pwmValue_2;
+    if (u_2 < 0) {
+      pwmValue_2 = -u_2 - deadBand;
+      ledcWrite(ledChannel3, pwmValue_2);
+      ledcWrite(ledChannel4, 0);
+    }
+    else if (u_2 > 0) {
+      pwmValue_2 = u_2 + deadBand;
+      ledcWrite(ledChannel3, 0);
+      ledcWrite(ledChannel4, pwmValue_2);
+    }
+    else {
+      ledcWrite(ledChannel3, 0);
+      ledcWrite(ledChannel4, 0);
+    }
+  } 
   else {
     ledcWrite(ledChannel3, 0);
     ledcWrite(ledChannel4, 0);
