@@ -100,7 +100,7 @@ void imuCalc(){
   float accRoll = atan2(aY, aZ);
   float accPitch = atan2(-aX, sqrt(aY * aY + aZ * aZ));
 
-  // Kombinerer ved hjelp av komplementært filter
+  //komplementært filter
   roll = alfa * gyroRoll + (1 - alfa) * accRoll;
   pitch = alfa * gyroPitch + (1 - alfa) * accPitch;
 }

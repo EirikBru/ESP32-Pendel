@@ -4,15 +4,15 @@ unsigned long prevTime = 0;
 // Encoder 1:
 volatile long encoderTicks_1 = 0;
 long prevEncoderTicks_1 = 0;
-const int hallSensorPinA_1 = 35;
-const int hallSensorPinB_1 = 34;
+const int hallSensorPinA_1 = 34;
+const int hallSensorPinB_1 = 35;
 double wheelPos_1 = 0;
 
 // Encoder 2:
 volatile long encoderTicks_2 = 0;
 long prevEncoderTicks_2 = 0;
-const int hallSensorPinA_2 = 12;
-const int hallSensorPinB_2 = 14;
+const int hallSensorPinA_2 = 14;
+const int hallSensorPinB_2 = 12;
 float wheelPos_2 = 0;
 
 void IRAM_ATTR encoderInterruptA_1() {
@@ -84,7 +84,7 @@ void encoderCalc() {
     double deltaRadians_2 = deltaTicks_2 * (2 * PI) / (n * 12);
     wheelSpeed_2 = deltaRadians_2 / (deltaTime / 1000000.0);
     
-    // Exponential Moving Average, (EMA) Filter
+    // Exponential Moving Average (EMA) Filter
     filteredSpeed_1 = alphaSpeed * filteredSpeed_1 + (1 - alphaSpeed) * wheelSpeed_1;
     filteredSpeed_2 = alphaSpeed * filteredSpeed_2 + (1 - alphaSpeed) * wheelSpeed_2;
     }
