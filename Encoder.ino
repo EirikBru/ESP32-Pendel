@@ -1,4 +1,8 @@
+
+// Filtreringskontanten til filteret:
 float alphaSpeed = 0.95; // (nærmere 0 = mindre filtrering)
+
+
 unsigned long prevTime = 0;
 
 // Encoder 1:
@@ -15,6 +19,8 @@ const int hallSensorPinA_2 = 14;
 const int hallSensorPinB_2 = 12;
 float wheelPos_2 = 0;
 
+
+// Bruker Interupt på encoder for raskere oppdatering:
 void IRAM_ATTR encoderInterruptA_1() {
     if (digitalRead(hallSensorPinB_1) != digitalRead(hallSensorPinA_1)) {
         encoderTicks_1++;
@@ -59,14 +65,14 @@ void setupEncoder(){
 }
 
 void encoderCalc() {
-    noInterrupts();
+    noInterrupts(); // setter interupts på pause under oppdatering
     long currentTicks_1 = encoderTicks_1;
     long currentTicks_2 = encoderTicks_2;
     unsigned long currTime = micros();
-    interrupts();
+    interrupts();   // Starter Interups igjen
 
     if(currTime - prevTime > 50){
-    wheelPos_1 = currentTicks_1*(360/(n*12));
+    wheelPos_1 = currentTicks_1*(360/(n*12));  // Gjør om til grader på reaksjonshjulet
     long deltaTicks_1 = currentTicks_1 - prevEncoderTicks_1;
 
     wheelPos_2 = currentTicks_2*(360/(n*12));

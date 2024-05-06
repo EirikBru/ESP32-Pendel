@@ -64,6 +64,7 @@ void printStuff(){
 //  Serial.print(" I_2: "); 
 //  Serial.print(I_2);
 
+
    if(vertical) {
 //    Serial.println(" vertical is true");
   } else {
@@ -72,12 +73,18 @@ void printStuff(){
   
 }
 
+
  void deltaTime_calc(){
   unsigned long currentTime = millis();
   dt = (currentTime - previousTime) / 1000.0; // Delta tid i sekunder
   previousTime = currentTime;
 }
 
+
+   /*
+    * Sjekker om pendelen er vertikal og lagrer dette i en bool verdi.
+    * slik at motorene kan stoppes hvis pendelen faller, eller man legger den ned.
+    */
 void verticalCheck(){
   float threshold = 0.2
   ; // radianer

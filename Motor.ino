@@ -1,8 +1,11 @@
+
+// motor GPIO Pinner:
 const int forewardPin_1 = 19;
 const int backwardPin_1 = 18; 
 const int forewardPin_2 = 27;
 const int backwardPin_2 = 25;
 
+// setter opp ledc (timere for PWM signal)
 const int ledChannel1 = 0;
 const int ledChannel2 = 1;
 const int ledChannel3 = 2;
@@ -31,7 +34,7 @@ void setupMotor(){
 
 void motorControl_1() {
   u_1 = constrain(u_1, -255 + deadBand, 255 - deadBand);  
-  
+
   if(vertical){
     int pwmValue_1;
     if (u_1 < 0) {

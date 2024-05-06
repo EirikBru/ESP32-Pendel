@@ -1,5 +1,13 @@
 void bluetoothUpdate() {
-  // Antar at k1, k2, k3, k4 er globale variabler av typen float
+  
+  /*
+  Denne funksjonen tar imot bluetooth fra standart bluetooth terminaler (eks. mobil app).
+  Deretter kan dette sette gain, offset, ønsket hastighet på reaksjonshjul, dødbånd og mer.
+  Noe som har vist seg å være veldig effektift under tuning av pendelen.
+  Deretter skriver den tilbake verdiene i terminal som en verifisering.
+  */
+
+  
   extern float k1, k2, k3, k4, desiredSpeed;
 
   if (SerialBT.available()) {

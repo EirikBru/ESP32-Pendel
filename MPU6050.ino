@@ -1,13 +1,19 @@
-Adafruit_MPU6050 mpu;
-float alfa = 0.96; // mengde acc i komplimentærfilter
+/*
+ * MPU blir satt til 2g i akselerasjon, 500rad/s i gyro og filterbåndbredde til 5Hz.
+ * 
+ */
 
+Adafruit_MPU6050 mpu;
+float alfa = 0.96; // mengde acc i komplimentærfilter (filterkonstant)
+
+
+// setter opp MPU6050 (hovedsaklig fra adafruits eksempelkode)
 void setupMPU(){
     while (!Serial)
-    delay(10); // will pause Zero, Leonardo, etc until serial console opens
+    delay(10); 
 
   Serial.println("Adafruit MPU6050 test!");
 
-  // Try to initialize!
   if (!mpu.begin()) {
     Serial.println("Failed to find MPU6050 chip");
     while (1) {
